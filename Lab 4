@@ -1,0 +1,120 @@
+import java.util.Scanner;
+
+class Menu{
+private String item;
+private double price;
+
+Menu(String i, double p){
+item = i;
+price = p;
+}
+
+double getPrice(){
+return price;
+}
+
+String getItem(){
+return item;
+}
+
+void setItem(String item){
+this.item = item;
+}
+
+void setPrice(double price){
+this.price = price;
+}
+
+String getMenuItem(){
+return (item + " RM" + String.format("%.2f", price));
+}
+
+double calcPrice(int quantity){
+return ((double)(price*quantity));
+
+}
+}
+
+class Orders{
+private int m_id;
+private String m_Name;
+private int o_Quantity;
+private double subTotal;
+
+Orders(int id, String name, int quantity, double subto){
+m_id = id;
+m_Name = name;
+o_Quantity = quantity;
+subTotal = subto;
+}
+
+void print(){
+System.out.println(m_id + " \t" + m_Name + " \t\t" + o_Quantity + " \t\tRM" + subTotal);
+}
+
+double getSubTotal(){
+return subTotal;
+}
+}
+
+public class Lab3_MenuDemo {
+public static void main(String args[]) throws java.io.IOException{
+char choice;
+int qty;
+double total=0.0;
+Scanner scan = new Scanner(System.in);
+
+Menu[] menus = new Menu[4];
+menus [0] = new Menu("Nasi Lemak", 2.00);
+menus [1] = new Menu("Roti ", 1.00);
+menus [2] = new Menu("Teh Tarik ", 1.50);
+menus [3] = new Menu("Kopi O ", 1.00);
+
+System.out.println("Menu Order System");
+System.out.println("----------------------------------------------");
+System.out.println("[1] " + menus[0].getMenuItem());
+System.out.println("[2] " + menus[1].getMenuItem());
+System.out.println("[3] " + menus[2].getMenuItem());
+System.out.println("[4] " + menus[3].getMenuItem());
+System.out.println("----------------------------------------------");
+System.out.println("Press n for new order | q to exit.");
+
+do{
+System.out.print("Add order: ");
+choice = (char) System.in.read();
+switch(choice){
+case '1':
+System.out.print("\t" + menus[0].getItem() + " - Quantity: ");
+qty = scan.nextInt();
+total += (menus[0].calcPrice(qty));
+System.out.print("\tPrice: RM" + menus[0].calcPrice(qty) + "\n");
+break;
+case '2':
+System.out.print("\t" + menus[1].getItem() + "- Quantity: ");
+qty = scan.nextInt();
+total += (menus[1].calcPrice(qty));
+System.out.print("\tPrice: RM" + menus[1].calcPrice(qty) + "\n");
+break;
+case '3':
+System.out.print("\t" + menus[2].getItem() + "- Quantity: ");
+qty = scan.nextInt();
+total += (menus[2].calcPrice(qty));
+System.out.print("\tPrice: RM" + menus[2].calcPrice(qty) + "\n");
+break;
+case '4':
+System.out.print("\t" + menus[3].getItem() + "- Quantitiy: ");
+qty = scan.nextInt();
+total += (menus[3].calcPrice(qty));
+System.out.print("\tPrice: RM" + menus[3].calcPrice(qty) + "\n");
+break;
+default :
+System.out.println(" Invalid choice");
+break;
+}
+} while (choice!='q');
+
+System.out.println("\nThank you for your order.");
+System.out.printf("Total due: RM %.2f",total);
+
+}
+}
