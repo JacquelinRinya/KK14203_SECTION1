@@ -140,7 +140,7 @@ class MyFrame
         rate.add(rating1); 
         rate.add(rating2); 
         rate.add(rating3); 
-        rate.add(rating3); 
+        rate.add(rating4); 
         rate.add(rating5); 
   
         outcome = new JLabel("Outcome"); 
