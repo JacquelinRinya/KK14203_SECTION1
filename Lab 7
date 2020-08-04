@@ -4,8 +4,8 @@ import java.awt.event.*;
   
 class MyFrame 
     extends JFrame 
-    implements ActionListener {
-    
+    implements ActionListener { 
+  
     private Container c; 
     private JLabel title; 
     private JLabel name; 
@@ -28,8 +28,8 @@ class MyFrame
     private JButton clear; 
     private JTextArea tout; 
     private JLabel res; 
-  
-  
+    private JLabel rcnfm;
+ 
     private String codes[] 
         = { "KK14203", "KT14202", "KK13203", "UW02204" }; 
    
@@ -44,12 +44,12 @@ class MyFrame
         JMenu file = new JMenu("Menu");
         menuBar.add(file);
         JMenuItem open = new JMenuItem("Load Data");
-        JMenuItem quit = new JMenuItem("Exit");
         open.addActionListener(this);
         file.add(open);
+        JMenuItem quit = new JMenuItem("Exit");
         quit.addActionListener(this);
         file.add(quit);
-  
+        
         c = getContentPane(); 
         c.setLayout(null); 
   
@@ -177,8 +177,8 @@ class MyFrame
   
         tout = new JTextArea(); 
         tout.setFont(new Font("Arial", Font.PLAIN, 15)); 
-        tout.setSize(425, 200); 
-        tout.setLocation(10, 290); 
+        tout.setSize(425, 150); 
+        tout.setLocation(10, 310); 
         tout.setLineWrap(true); 
         tout.setEditable(false); 
         c.add(tout); 
@@ -188,6 +188,12 @@ class MyFrame
         res.setSize(500, 25); 
         res.setLocation(100, 500); 
         c.add(res); 
+        
+        rcnfm = new JLabel(""); 
+        rcnfm.setFont(new Font("TIMES NEW ROMAN", Font.PLAIN, 15)); 
+        rcnfm.setSize(500, 25); 
+        rcnfm.setLocation(100, 280); 
+        c.add(rcnfm); 
   
         setVisible(true); 
     } 
@@ -205,20 +211,31 @@ class MyFrame
                 if (rating1.isSelected()) 
                     data1 = "Rating : 1"
                             + "\n"; 
+                if (rating2.isSelected()) 
+                    data1 = "Rating : 2"
+                            + "\n"; 
+                if (rating3.isSelected()) 
+                    data1 = "Rating : 3"
+                            + "\n"; 
+                if (rating4.isSelected()) 
+                    data1 = "Rating : 4"
+                            + "\n"; 
                 else
-                    data1 = "Rating : 2" + "\n";
+                    data1 = "Rating : 5" + "\n";
                 String data2 
                     = "Course Code : "
                       + (String)code.getSelectedItem()
                       + "\n"; 
-  
-                tout.setText(data + data1 + data2); 
+                String data3 = " "; 
+                tout.setText(data + data1 + data2 + data3); 
                 tout.setEditable(false); 
-                res.setText(""); 
+                res.setText("Evaluation Successful"); 
             } 
             else { 
                 tout.setText("");  
                 res.setText(""); 
+                rcnfm.setText("Please complete"
+                        + " the evaluation"); 
             } 
         } 
   
@@ -232,8 +249,16 @@ class MyFrame
             code.setSelectedIndex(0);  
            
         } 
-    } 
+        String choice = e.getActionCommand();
+        if (choice.equals("Load Data")) {
+           System.exit(0);
+        }
+        else if (choice.equals("Exit")) {
+           JOptionPane.showMessageDialog(this,"Sure to Exit?");
+      } 
+    }
 }
+
 class CourseEvaluation { 
   
     public static void main(String[] args) throws Exception 
