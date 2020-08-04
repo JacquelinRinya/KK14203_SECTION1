@@ -313,8 +313,6 @@ class MyFrame
         } 
     } 
 } 
-  
-// Driver Code 
 class Kindergarten { 
   
     public static void main(String[] args) throws Exception 
